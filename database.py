@@ -44,7 +44,6 @@ SELECT * FROM movies
 INSERT_WATCHED_MOVIE = 'INSERT INTO watched (user_username, movie_id) VALUES (%s, %s)'
 SET_MOVIE_WATCHED = 'UPDATE movies SET watched = 1 WHERE title = %s;'
 SEARCH_MOVIE = 'SELECT * FROM movies WHERE title LIKE %s;'
-CREATE_RELEASE_INDEX = 'CREATE INDEX IF NOT EXISTS idx_movies_release ON movies(release_timestamp);'
 
 connection = psycopg2.connect(os.environ['DATABASE_URL'])
 
@@ -55,7 +54,6 @@ def create_tables():
             cursor.execute(CREATE_MOVIES_TABLE)
             cursor.execute(CREATE_USERS_TABLE)
             cursor.execute(CREATE_WATCHED_TABLE)
-            cursor.execute(CREATE_RELEASE_INDEX)
 
 def add_user(username):
     with connection:
